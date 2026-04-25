@@ -13,3 +13,4 @@ Feature: Agoda Hotel Search
     And I set children to 0
     And I set children to 1
     And I click on the search button
+    Then more than 0 properties are found

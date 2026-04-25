@@ -2,6 +2,7 @@ import time
 from behave import given, when, then
 from pages.home_page import HomePage
 from utils.date_helper import get_future_date
+from pages.search_hotel_result_page import SearchHotelResultPage
 
 @given('I navigate to Agoda home page')
 def navigate_to_agoda_home_page(context):
@@ -36,4 +37,6 @@ def set_children(context, children: int):
 
 @when('I click on the search button')
 def click_search_button(context):
-    context.home_page.click_search_button()
+    new_page = context.home_page.click_search_button()
+    context.page = new_page
+    context.search_hotel_result_page = SearchHotelResultPage(new_page)
