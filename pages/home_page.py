@@ -86,4 +86,8 @@ class HomePage(BasePage):
             current -= 1
 
     def click_search_button(self):
-        self.page.locator(self.SEARCH_BTN).click()
+        with self.page.expect_popup() as popup_info:
+            self.page.locator(self.SEARCH_BTN).click()
+        new_page = popup_info.value
+        new_page.wait_for_load_state("networkidle")
+        return new_page
