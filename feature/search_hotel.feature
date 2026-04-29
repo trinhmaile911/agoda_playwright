@@ -1,7 +1,7 @@
 Feature: Agoda Hotel Search
 
-  @happy_path
-  Scenario: Successful search for hotel
+   @happy_path
+   Scenario: Successful search for hotel
     Given I navigate to Agoda home page
     When I search for "Tokyo" as destination
     And I select check-in date 60 days from now
@@ -15,8 +15,8 @@ Feature: Agoda Hotel Search
     And I click on the search button
     Then more than 0 properties are found
 
-  @happy_path
-  Scenario: Select budget per night
+   @happy_path
+   Scenario: Select budget per night
     Given I navigate to Agoda home page
     When I search for "Tokyo" as destination
     And I select check-in date 60 days from now
@@ -24,3 +24,15 @@ Feature: Agoda Hotel Search
     And I click on the search button
     And I select minimum budget to 20 percent and maximum budget percent to 30
     Then the budget slider should be set correctly
+
+  @happy_path
+  Scenario: Filter search results by Hotel property type
+   Given I navigate to Agoda home page
+   When I search for "Singapore" as destination
+   And I select check-in date 60 days from now
+   And I select check-out date 62 days from now
+   And I click on the search button
+   When I select "Hotel" property type
+   Then the "Hotel" filter should be selected
+   And the filter count for "Hotel" should equal the total property count
+
