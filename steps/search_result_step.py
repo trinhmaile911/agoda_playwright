@@ -18,3 +18,18 @@ def verify_budget_slider(context):
     assert min_price >= 0, f"Min price = {min_price}"
     assert max_price > min_price, f"Max price = {max_price}"
     print(f"Min price = {min_price}, Max price = {max_price}")
+
+@when('I select "{property_type}" property type')
+def select_property_type(context, property_type):
+    context.search_hotel_result_page.select_property_type(property_type)
+
+@then('the "{filter_name}" filter should be selected')
+def verify_filter_selected(context, filter_name):
+    is_check = context.search_hotel_result_page.is_property_checked(filter_name)
+    assert is_check, f"Property checked = {is_check}"
+
+@then('the filter count for "{filter_name}" should equal the total property count')
+def verify_filter_count(context, filter_name):
+    filter_count = context.search_hotel_result_page.get_filter_count_for_property_type(filter_name)
+    total_property_count = context.search_hotel_result_page.get_property_count()
+    assert filter_count == total_property_count, f"Property count = {filter_count}"

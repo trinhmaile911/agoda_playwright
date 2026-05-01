@@ -11,6 +11,8 @@ class SearchHotelResultPage(BasePage):
     MAX_HANDLE = '.rc-slider-handle.rc-slider-handle-2'
     MIN_PRICE = 'input#price_box_0'
     MAX_PRICE = 'input#price_box_1'
+    FILTER_ITEM_TEXT = '[data-selenium="filter-item-text"]'
+    FILTER_COUNT = '[data-selenium="filter-count"]'
 
     def __init__(self, page):
         super().__init__(page)
@@ -50,3 +52,24 @@ class SearchHotelResultPage(BasePage):
     def get_max_price(self):
         value = self.page.locator(self.MAX_PRICE).last.input_value()
         return int(value.replace(',',''))
+
+    def select_property_type(self, property_type):
+        self.page.get_by_text(property_type, exact=True).click()
+        self.page.wait_for_load_state('networkidle')
+
+    def is_property_checked(self, property_type):
+        checkbox = self.page.get_by_role('checkbox', name=property_type).first
+        return checkbox.is_checked()
+
+    def get_filter_count_for_property_type(self, property_type):
+        all_filters = self.page.locator(f'{self.FILTER_ITEM_TEXT}:text-is("{property_type}")')
+
+        for i in range(all_filters.count()):
+            try:
+                filter_elem = all_filters.nth(i)
+                parent_text = filter_elem.locator('..').text_content()
+                match = re.search(r'(\d+)', parent_text)
+                if match:
+                    return int(match.group(1).replace(',', ''))
+            except:
+                continue
