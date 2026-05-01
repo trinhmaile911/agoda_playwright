@@ -1,10 +1,26 @@
-# Python
-__pycache__/
-*.py[cod]
-.venv/
-
-# IDE
-.idea/
-
-# Test artifacts
-screenshots/*.png
+ # Virtual environment                                                                                                                                           
+  .venv/                                                                                                                                                          
+  venv/                                                                                                                                                           
+  env/                                                                                                                                                            
+                                                                                                                                                                  
+  # Python                                                                                                                                                        
+  __pycache__/                                                                                                                                                    
+  *.pyc                                                                                                                                                           
+  *.pyo                                                                                                                                                           
+                                                                                                                                                                  
+  # Test artifacts                                                                                                                                                
+  screenshots/*.png                                                                                                                                               
+  reports/                                                                                                                                                        
+  *.log                                                                                                                                                           
+                                                                                                                                                                  
+  # Playwright                                                                                                                                                    
+  .pytest_cache/                                                                                                                                                  
+  test-results/                                                                                                                                                   
+                                                                                                                                                                  
+  # IDE                                                                                                                                                           
+  .idea/                                                                                                                                                          
+  .vscode/                                                                                                                                                        
+  *.swp                                                 
+                                                                                                                                                                  
+  # OS                                                                                                                                                            
+  .DS_Store   
