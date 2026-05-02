@@ -51,7 +51,7 @@ jobs:
       - name: Run Behave tests
         run: |
           xvfb-run --auto-servernum behave \
-            --tags=@happy_path \
+            --tags=@smoke \
             --format allure_behave.formatter:AllureFormatter \
             --outfile allure-results \
             --format pretty \

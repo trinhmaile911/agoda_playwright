@@ -1,6 +1,6 @@
 Feature: Agoda Hotel Search
 
-   @happy_path
+   @happy_path @smoke
    Scenario: Successful search for hotel
     Given I navigate to Agoda home page
     When I search for "Tokyo" as destination
@@ -15,7 +15,7 @@ Feature: Agoda Hotel Search
     And I click on the search button
     Then more than 0 properties are found
 
-   @happy_path
+   @happy_path @smoke
    Scenario: Select budget per night
     Given I navigate to Agoda home page
     When I search for "Tokyo" as destination
