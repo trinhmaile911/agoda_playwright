@@ -25,12 +25,12 @@ Feature: Agoda Hotel Search
     And I select minimum budget to 20 percent and maximum budget percent to 30
     Then the budget slider should be set correctly
 
-  @happy_path @search @filter
+  @happy_path @filter
   Scenario: Filter search results by Hotel property type
    Given I navigate to Agoda home page
    When I search for "Tokyo" as destination
    And I select check-in date 60 days from now
-   And I select check-out date 62 days from now
+   And I select check-out date 75 days from now
    And I click on the search button
    When I select "Hotel" property type
    Then the "Hotel" filter should be selected
@@ -41,7 +41,7 @@ Feature: Agoda Hotel Search
     Given I navigate to Agoda home page
     When I search for "Tokyo" as destination
     And I select check-in date 60 days from now
-    And I select check-out date 62 days from now
+    And I select check-out date 75 days from now
     And I click on the search button
     When I click on the sort dropdown
     Then the sort dropdown should contain the following options:
@@ -57,7 +57,7 @@ Feature: Agoda Hotel Search
     Given I navigate to Agoda home page
     When I search for "Tokyo" as destination
     And I select check-in date 60 days from now
-    And I select check-out date 62 days from now
+    And I select check-out date 75 days from now
     And I click on the search button
     When I select sort option "Lowest price"
     Then the first property should have the lowest price
