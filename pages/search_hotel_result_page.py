@@ -14,6 +14,7 @@ class SearchHotelResultPage(BasePage):
     FILTER_COUNT = '[data-selenium="filter-count"]'
     SORT_DROPDOWN = 'button[data-react-aria-pressable="true"][aria-haspopup="true"]'
     SORT_OPTION = 'role=option'
+    PROPERTY_PRICE = '[data-element-name="final-price"] [data-selenium="display-price"]'
 
     def __init__(self, page):
         super().__init__(page)
@@ -91,6 +92,7 @@ class SearchHotelResultPage(BasePage):
         option = self.page.locator(self.SORT_OPTION).filter(has_text=option_name)
         option.click()
         option.wait_for(state='detached', timeout=5000)
+        self.page.wait_for_load_state('networkidle', timeout=10000)
 
     def get_current_sort_option(self):
         return self.page.locator(self.SORT_OPTION).text_content()
@@ -99,3 +101,20 @@ class SearchHotelResultPage(BasePage):
         options = self.page.get_by_role('option').all_text_contents()
         self.page.keyboard.press('Escape')
         return options
+
+    def get_all_property_prices(self):
+        self.page.locator(self.PROPERTY_PRICE).first.wait_for(state='visible', timeout=10000)
+        price_elements = self.page.locator(self.PROPERTY_PRICE).all()
+        prices = []
+
+        for price_element in price_elements[:10]:
+            try:
+                text = price_element.text_content()
+                match = re.search(r'[\d,]+', text)
+                if match:
+                    price_str = match.group().replace(',', '')
+                    prices.append(int(price_str))
+            except Exception:
+                continue
+
+        return prices

@@ -45,3 +45,13 @@ def verify_sort_options(context):
 
     for expected in expected_options:
         assert expected in actual_options, f"Expected option '{expected}' not found in {actual_options}"
+
+@when('I select sort option "{option_name}"')
+def select_option(context, option_name):
+    context.search_hotel_result_page.select_sort_option(option_name)
+
+@then('the first property should have the lowest price')
+def verify_lowest_price_first(context):
+    prices = context.search_hotel_result_page.get_all_property_prices()
+    assert len(prices) > 0, "No prices found"
+    assert prices[0] == min(prices), f"First price {prices[0]} is not the lowest in {prices}"
