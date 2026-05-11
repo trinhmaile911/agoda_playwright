@@ -33,3 +33,25 @@ def verify_filter_count(context, filter_name):
     filter_count = context.search_hotel_result_page.get_filter_count_for_property_type(filter_name)
     total_property_count = context.search_hotel_result_page.get_property_count()
     assert filter_count == total_property_count, f"Property count = {filter_count}"
+
+@when('I click on the sort dropdown')
+def click_on_sort_dropdown(context):
+    context.search_hotel_result_page.click_sort_dropdown()
+
+@then('the sort dropdown should contain the following options:')
+def verify_sort_options(context):
+    expected_options = [row['option'] for row in context.table]
+    actual_options = context.search_hotel_result_page.get_all_sort_options()
+
+    for expected in expected_options:
+        assert expected in actual_options, f"Expected option '{expected}' not found in {actual_options}"
+
+@when('I select sort option "{option_name}"')
+def select_option(context, option_name):
+    context.search_hotel_result_page.select_sort_option(option_name)
+
+@then('the first property should have the lowest price')
+def verify_lowest_price_first(context):
+    prices = context.search_hotel_result_page.get_all_property_prices()
+    assert len(prices) > 0, "No prices found"
+    assert prices[0] == min(prices), f"First price {prices[0]} is not the lowest in {prices}"
