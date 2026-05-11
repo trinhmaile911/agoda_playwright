@@ -28,7 +28,7 @@ Feature: Agoda Hotel Search
   @happy_path @search @filter
   Scenario: Filter search results by Hotel property type
    Given I navigate to Agoda home page
-   When I search for "Singapore" as destination
+   When I search for "Tokyo" as destination
    And I select check-in date 60 days from now
    And I select check-out date 62 days from now
    And I click on the search button
@@ -39,7 +39,7 @@ Feature: Agoda Hotel Search
   @happy_path @sort
   Scenario: Verify sort dropdown contains all options
     Given I navigate to Agoda home page
-    When I search for "Singapore" as destination
+    When I search for "Tokyo" as destination
     And I select check-in date 60 days from now
     And I select check-out date 62 days from now
     And I click on the search button
@@ -55,7 +55,7 @@ Feature: Agoda Hotel Search
   @happy_path @sort @smoke
   Scenario: Sort by lowest price
     Given I navigate to Agoda home page
-    When I search for "Singapore" as destination
+    When I search for "Tokyo" as destination
     And I select check-in date 60 days from now
     And I select check-out date 62 days from now
     And I click on the search button
