@@ -1,2 +1,7 @@
 playwright
 behave
+requests
+responses
+pytest
+pytest-mock
+allure-pytest

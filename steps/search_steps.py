@@ -19,7 +19,7 @@ def select_check_in_date(context, days: int):
     context.home_page.select_date(date)
 
 @when('I select check-out date {days:d} days from now')
-def select_check_in_date(context, days: int):
+def select_check_out_date(context, days: int):
     date = get_future_date(days)
     context.home_page.select_date(date)
 
